@@ -1,14 +1,8 @@
+let humanScore = 0
+let computerScore = 0
+
 function getComputerChoice() {
-    return randomNumber = Math.floor(Math.random () * 3)
-    // if (randomNumber === 0) {
-    //     return "rock";
-    // }
-    // else if (randomNumber === 1) {
-    //     return "paper";
-    // }
-    // else {
-    //     return "scissors";
-    // }
+    return Math.floor(Math.random() * 3);
 }
 
 function getHumanChoice() {
@@ -30,52 +24,64 @@ function getHumanChoice() {
     }
 }
 
+function playRound(humanChoice, computerChoice) {
 
-function playGame() {
+    let resultText = "";
 
-    let humanScore = 0
-    let computerScore = 0
-
-    function playRound(humanChoice, computerChoice) {
-        if (humanChoice === computerChoice) {
-            humanScore ++;
-            computerScore ++;
-            console.log("Draw!")
-        }
-        else if (
-            (humanChoice === 0 && computerChoice === 2) ||
-            (humanChoice === 1 && computerChoice === 0) ||
-            (humanChoice === 2 && computerChoice === 1)
-        ) {
-            humanScore ++;
-            console.log("You win!");
-        }
-        else {
-            computerScore ++;
-            console.log("You lose!");
-        }
+    if (humanChoice === computerChoice) {
+        humanScore ++;
+        computerScore ++;
+        resultText = "Draw";
+    }
+    else if (
+        (humanChoice === 0 && computerChoice === 2) ||
+        (humanChoice === 1 && computerChoice === 0) ||
+        (humanChoice === 2 && computerChoice === 1)
+    ) {
+        humanScore ++;
+        resultText = "You Win!";
+    }
+    else {
+        computerScore ++;
+        resultText = "You Lose!";
     }
 
-    const humanSelection1 = getHumanChoice();
-    const computerSelection1 = getComputerChoice();
-    playRound(humanSelection1, computerSelection1);
-    const humanSelection2 = getHumanChoice();
-    const computerSelection2 = getComputerChoice();
-    playRound(humanSelection2, computerSelection2);
-    const humanSelection3 = getHumanChoice();
-    const computerSelection3 = getComputerChoice();
-    playRound(humanSelection3, computerSelection3);
-    const humanSelection4 = getHumanChoice();
-    const computerSelection4 = getComputerChoice();
-    playRound(humanSelection4, computerSelection4);
-    const humanSelection5 = getHumanChoice();
-    const computerSelection5 = getComputerChoice();
-    playRound(humanSelection5, computerSelection5);
+    roundResult.textContent = resultText;
+    score.textContent = `Human: ${humanScore} | Computer: ${computerScore}`;
 
-    console.log(("Final Score - Human: " + humanScore + " " + "Computer: " + computerScore));
+    const results = document.querySelector(".results");
 
+    if (humanScore >= 5) {
+        roundResult.textContent = "You have won the Game";
+        rockButton.disabled = true;
+        paperButton.disabled = true;
+        scissorButton.disabled = true;
+        // let humanWin = document.createElement("p");
+        // humanWin.textContent = "You have won the game!";
+        // results.appendChild(humanWin);
+    } else if (computerScore >= 5) {
+        roundResult.textContent = "You have lost the Game";
+        rockButton.disabled = true;
+        paperButton.disabled = true;
+        scissorButton.disabled = true;
+        // let computerWin = document.createElement("p");
+        // computerWin.textContent = "You have lost the game!";
+        // results.appendChild(computerWin);
+    // } else if (humanScore === computerScore) {
+    //     let draw = document.createElement("P");
+    //     draw.textContent = "It's Draw";
+    }
 }
 
-playGame();
+const rockButton = document.querySelector("#rock");
+const paperButton = document.querySelector("#paper");
+const scissorButton = document.querySelector("#scissors");
+
+rockButton.addEventListener("click", () => playRound(0, getComputerChoice()));
+paperButton.addEventListener("click", () => playRound(1, getComputerChoice()));
+scissorButton.addEventListener("click", () => playRound(2, getComputerChoice()));
+
+const roundResult = document.querySelector("#round-result");
+const score = document.querySelector("#score");
 
 
