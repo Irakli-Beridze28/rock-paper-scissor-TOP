@@ -1,0 +1,122 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+  height: 100vh;
+  margin: 0;
+  overflow: auto;
+  font-family: 'Roboto', sans-serif;
+  display: flex;
+  flex-direction: column;
+  background-color: #E3F2FD;
+  color: #0A192F;
+}
+
+.header, .rps-buttons, .results, .reset, .footer {
+    display: flex;
+    /* border: 1px solid red; */
+    justify-content: center;
+    padding: 5px;
+    align-items: center;
+    flex-wrap: wrap;
+    flex-shrink: 1;
+}
+
+.header {
+    padding: 10px;
+    background-color: #0D47A1;
+    color: #FFFFFF;
+}
+
+.rps-buttons {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 150px 0px 20px 0px;
+}
+
+#rock, #paper, #scissors {
+    height: 200px;
+    width: 200px;
+    font-size: 150px;
+    text-align: center;
+    padding: 0px;
+    background-color: #1E90FF;
+    border-radius: 8px;
+    transition-duration: 0.4s;
+}
+
+#rock:hover, #paper:hover, #scissors:hover {
+    box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+    background-color: #a8d4ff;
+}
+
+#rock:active, #paper:active, #scissors:active {
+    background-color: #d4d7dd;
+    transform: translateY(5px);
+}
+
+.results {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+.reset {
+    display: flex;
+    padding: 20px;
+}
+
+#game-reset {
+    padding: 5px;
+    background-color: #1E90FF;
+    border-radius: 8px;
+    color: white;
+    transition-duration: 0.4s;
+    &:hover {
+        /* box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19); */
+        background-color: #3a83cc;
+    }
+    &:active {
+        background-color: #d4d7dd;
+        transform: translateY(5px);
+    }
+}
+
+.footer {
+    display: flex;
+    margin-top: auto;
+    background-color: #0c397e;
+    color: #FFFFFF;
+    padding: 20px;
+}
+
+a {
+    color: #FFFFFF;
+    text-decoration: none;
+    &:hover {
+        color: #a8d4ff;
+    }
+}
+
+.github-logo {
+    height: 15px;
+    width: 15px;
+}
+
+@keyframes winner-glow {
+  0% { color: #4CAF50; text-shadow: 0 0 5px #4CAF50; }
+  50% { color: #81C784; text-shadow: 0 0 20px #81C784; }
+  100% { color: #4CAF50; text-shadow: 0 0 5px #4CAF50; }
+}
+
+@keyframes loser-shake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-5px); }
+  75% { transform: translateX(5px); }
+}

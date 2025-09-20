@@ -31,7 +31,8 @@ function playRound(humanChoice, computerChoice) {
     if (humanChoice === computerChoice) {
         humanScore ++;
         computerScore ++;
-        resultText = "Draw";
+        resultText = "⚖️ Draw";
+        roundResult.style.color = "orange";
     }
     else if (
         (humanChoice === 0 && computerChoice === 2) ||
@@ -39,28 +40,38 @@ function playRound(humanChoice, computerChoice) {
         (humanChoice === 2 && computerChoice === 1)
     ) {
         humanScore ++;
-        resultText = "You Win!";
+        resultText = "✅ You Win!";
+        roundResult.style.color = "green";
     }
     else {
         computerScore ++;
-        resultText = "You Lose!";
+        resultText = "❌ You Lose!";
+        roundResult.style.color = "red";
     }
 
     roundResult.textContent = resultText;
     score.textContent = `Human: ${humanScore} | Computer: ${computerScore}`;
 
-    const results = document.querySelector(".results");
-
-    if (humanScore >= 5) {
-        roundResult.textContent = "You have won the Game";
+    if (humanScore >= 5 && computerScore >= 5) {
+        roundResult.textContent = "🤝 It's a Draw!";
         rockButton.disabled = true;
         paperButton.disabled = true;
         scissorButton.disabled = true;
+        roundResult.style.color = "orange";
+    } else if (humanScore >= 5) {
+        roundResult.textContent = "🎉 You have won the Game!";
+        rockButton.disabled = true;
+        paperButton.disabled = true;
+        scissorButton.disabled = true;
+        roundResult.style.color = "green";
+        roundResult.style.animation = "winner-glow 1s infinite alternate";
     } else if (computerScore >= 5) {
-        roundResult.textContent = "You have lost the Game";
-        rockButton.disabled = true;
-        paperButton.disabled = true;
-        scissorButton.disabled = true;
+    roundResult.textContent = "💀 You have lost the Game!";
+    rockButton.disabled = true;
+    paperButton.disabled = true;
+    scissorButton.disabled = true;
+    roundResult.style.color = "red";
+    roundResult.style.animation = "loser-shake 0.5s infinite";
     }
 }
 
@@ -80,6 +91,8 @@ resetButton.addEventListener("click", () => {
     rockButton.disabled = false;
     paperButton.disabled = false;
     scissorButton.disabled = false;
+    roundResult.style.color = "";
+    roundResult.style.animation = "";
 });
 
 const roundResult = document.querySelector("#round-result");
